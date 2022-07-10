@@ -16,10 +16,10 @@ $ cd railsdocker
 
 2.関連するdockerイメージ,コンテナを削除する。
 
-3.rails newコマンドをweb上で実行
+3.rails newコマンドをrailpapp上で実行
 ```
 $ docker-compose build
-$ docker-compose run --no-deps web rails new . --webpack --force --database=postgresql
+$ docker-compose run --no-deps railpapp rails new . --webpack --force --database=postgresql
 ```
 
 4.railsのディレクトリができているかチェック
@@ -39,7 +39,7 @@ $ docker-compose build
 
 7.webpackerのインストール
 ```
-$ docker-compose run web rails webpacker:install
+$ docker-compose run railpapp rails webpacker:install
 ```
 
 8.DBの設定を変更
@@ -76,7 +76,7 @@ $ docker-compose up
 
 10.別タブを開き下記のコマンドを実行してDBを作成
 ```
-$ docker-compose run web rake db:create
+$ docker-compose run railpapp rake db:create
 ```
 
 ## ログインURL
