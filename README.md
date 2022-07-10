@@ -10,7 +10,7 @@ https://qiita.com/na-777/items/fcccb48b4f3b549abe61
 1.本レポジトリをクロンする。
 
 ```bash
-$ git clone git@github.com:naritomo08/railspostgres.git railsdocker
+$ git clone git@github.com:naritomo08/railspostgres.git railspostgres
 $ cd railsdocker
 ```
 
