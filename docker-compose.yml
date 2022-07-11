@@ -3,7 +3,7 @@ services:
   postgresdb:
     image: postgres
     volumes:
-      - ./tmp/db:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
   railpapp:
@@ -15,3 +15,6 @@ services:
       - "3000:3000"
     depends_on:
       - postgresdb
+volumes:
+  postgres-data:
+    driver: local

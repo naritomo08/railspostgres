@@ -11,7 +11,7 @@ https://qiita.com/na-777/items/fcccb48b4f3b549abe61
 
 ```bash
 $ git clone git@github.com:naritomo08/railspostgres.git railspostgres
-$ cd railsdocker
+$ cd railspostgres
 ```
 
 2.関連するdockerイメージ,コンテナを削除する。
@@ -44,12 +44,12 @@ $ docker-compose run railpapp rails webpacker:install
 
 8.DBの設定を変更
 ```
-$ vi config/database.yml
+$ vi src/config/database.yml
 
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: db #追加
+  host: postgresdb #追加
   username: postgres #追加
   password: password #追加
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
