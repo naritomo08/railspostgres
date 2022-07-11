@@ -27,32 +27,38 @@ $ docker-compose build
 手順9に飛んでサービスが立ち上がるか確認する。
 
 3.rails newコマンドをrailpapp上で実行
+
 ```
 $ docker-compose build
 $ docker-compose run --no-deps railpapp rails new . --webpack --force --database=postgresql
 ```
 
 4.railsのディレクトリができているかチェック
+
 ```
 $ ls -l
 ```
 
 5.所有者がrootになっているファイルの所有者を現在のユーザに書き換え
+
 ```
 $ sudo chown -R $USER:$USER .
 ```
 
 6.rails new で新しいGemfileができたので再ビルド
+
 ```
 $ docker-compose build
 ```
 
 7.webpackerのインストール
+
 ```
 $ docker-compose run railpapp rails webpacker:install
 ```
 
 8.DBの設定を変更
+
 ```
 $ vi src/config/database.yml
 
@@ -80,33 +86,47 @@ production:
 ```
 
 9.コンテナ立ち上げ
+
 ```
 $ docker-compose up
 途中で立ち上がらないなどのエラーが出ないこと。
 ```
 
 10.別タブを開き下記のコマンドを実行してDBを作成
+
 ```
 $ docker exec -ti railspostgres_railpapp_1 bash
 $ rake db:create
 ```
 
-本手順でプロジェクト作り直しから実施した場合、
+本手順でアプリ新規作り直しから実施した場合、
 すべてのコンソールを立ち上げなおし、
 すべてのコンテナを削除後立ち上げなおすこと。
 
-既存のプロジェクトの場合、すべてのコンソールを立ち上げなおし
+既存のアプリの場合、すべてのコンソールを立ち上げなおし
 下記手順を使用し立ち上げなおしを実施すること。
 
 ## ログインURL
+
 ```
 http://localhost:3000
 ```
 
-## 以降の起動・停止
+## コンテナ起動
 
 ```
 docker-compose up -d
+```
+
+## コンテナ停止
+
+```
+docker-compose stop
+```
+
+## コンテナ削除
+
+```
 docker-compose down
 ```
 
@@ -122,4 +142,13 @@ $ docker exec -ti railspostgres_railpapp_1 bash
 
 ```bash
 $ docker exec -ti railspostgres_postgresdb_1 bash
+```
+## Gemfileを更新した場合
+
+以下のコマンドでコンテナ再ビルド/作り直しを行うこと。
+
+```bash
+docker-compose down
+docker-compose build
+docker-compose up -d
 ```
