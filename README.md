@@ -28,7 +28,6 @@ $ cp Gemfile.lock src/
 2.2　railsアプリがすでにある場合
 
 ```bash
-$ rm -rf src
 $ git clone git@github.com:naritomo08/railspostgresapp.git src
 $ docker-compose build
 ```
