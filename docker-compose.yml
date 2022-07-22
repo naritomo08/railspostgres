@@ -6,6 +6,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
+
   railpapp:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -15,6 +16,22 @@ services:
       - "3000:3000"
     depends_on:
       - postgresdb
+
+  adminer:
+    image: adminer:4.8.0
+    container_name: railspost_adminer
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgresdb
+
+  mail:
+    image: mailhog/mailhog
+    container_name: railspost_mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+
 volumes:
   postgres-data:
     driver: local
