@@ -14,6 +14,8 @@ https://qiita.com/na-777/items/fcccb48b4f3b549abe61
 ```bash
 $ git clone git@github.com:naritomo08/railspostgres.git railspostgres
 $ cd railspostgres
+$ git config --local user.name "naritomo"
+$ git config --local user.email naritomo08@gmail.com
 ```
 
 2.1 railsアプリの新規作成からする場合
@@ -30,6 +32,9 @@ $ cp Gemfile.lock src/
 ```bash
 $ git clone git@github.com:naritomo08/railspostgresapp.git src
 $ docker-compose build
+$ cd src
+$ git config --local user.name "naritomo"
+$ git config --local user.email naritomo08@gmail.com
 ```
 
 手順9に飛んでサービスが立ち上がるか確認する。
