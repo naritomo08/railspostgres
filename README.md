@@ -166,13 +166,13 @@ docker-compose down
 1. appコンテナ
 
 ```bash
-$ docker exec -ti railspostgres_railpapp_1 bash
+$ docker-compose exec railpapp bash
 ```
 
 2. DBコンテナ
 
 ```bash
-$ docker exec -ti railspostgres_postgresdb_1 bash
+$ docker-compose exec postgresdb bash
 ```
 ## Gemfileを更新した場合
 
