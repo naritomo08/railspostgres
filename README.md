@@ -94,16 +94,9 @@ $ docker-compose up -d
 ### 下記のコマンドを実行してDBを作成
 
 ```bash
-$ docker exec -ti railspostgres_railpapp_1 bash
+$ docker-compose exec railmapp bash
 $ rake db:create
 ```
-
-本手順でアプリ新規作り直しから実施した場合、
-すべてのコンソールを立ち上げなおし、
-すべてのコンテナを削除後立ち上げなおすこと。
-
-既存のアプリの場合、すべてのコンソールを立ち上げなおし
-下記手順を使用し立ち上げなおしを実施すること。
 
 ## ログインURL
 
