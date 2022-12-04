@@ -1,79 +1,64 @@
 ## 参考URL
-https://qiita.com/na-777/items/fcccb48b4f3b549abe61
+[Windows10のWSL2(Ubuntu)でDockerを使ったRails環境構築](https://qiita.com/na-777/items/fcccb48b4f3b549abe61)
+
+[Elixirをdocker環境で立ち上げてみる。](https://qiita.com/naritomo08/items/fecf4ace7b9ca9078102)
 
 ## 事前準備
 
-自分の端末の公開鍵をgithubの個人設定に登録してあること。
+windows11+wsl2+Ubuntu22+DockerCompose+vscodeでの環境を構築してること。
 
 ## 環境構築手順
 
-1.不要なdockerイメージ,ボリューム,コンテナを削除する。
+### 不要なdockerイメージ,ボリューム,コンテナを削除する。
 
-2.本レポジトリをクロンする。
+### 本レポジトリをクロンする。
 
 ```bash
 $ git clone git@github.com:naritomo08/railspostgres.git railspostgres
 $ cd railspostgres
-$ git config --local user.name "naritomo"
-$ git config --local user.email naritomo08@gmail.com
 ```
 
-2.1 railsアプリの新規作成からする場合
+### railsアプリの新規作成準備
 
 ```bash
 $ mkdir src
 $ cp Gemfile src/
 $ cp Gemfile.lock src/
 ```
-手順3以降を実施する。
-
-2.2　railsアプリがすでにある場合
+### rails newコマンドをrailpapp上で実行
 
 ```bash
-$ git clone git@github.com:naritomo08/railspostgresapp.git src
-$ docker-compose build
-$ cd src
-$ git config --local user.name "naritomo"
-$ git config --local user.email naritomo08@gmail.com
-```
-
-手順9に飛んでサービスが立ち上がるか確認する。
-
-3.rails newコマンドをrailpapp上で実行
-
-```
 $ docker-compose build
 $ docker-compose run --no-deps railpapp rails new . --webpack --force --database=postgresql
 ```
 
-4.railsのディレクトリができているかチェック
+### railsのディレクトリができているかチェック
 
-```
+```bash
 $ ls -l
 ```
 
-5.所有者がrootになっているファイルの所有者を現在のユーザに書き換え
-*状況によってはいらない。
+### 所有者がrootになっているファイルの所有者を現在のユーザに書き換え
 
-```
+```bash
 $ sudo chown -R $USER:$USER .
 ```
 
-6.rails new で新しいGemfileができたので再ビルド
+### rails new で新しいGemfileができたので再ビルド
 
-```
+```bash
 $ docker-compose build
 ```
 
-7.webpackerのインストール
+### webpackerのインストール
 
-```
+```bash
 $ docker-compose run railpapp rails webpacker:install
 ```
 
-8.DBの設定を変更
+### DBの設定を変更
 
-```
+```bash
 $ vi src/config/database.yml
 
 default: &default
@@ -99,16 +84,16 @@ production:
   password: <%= ENV['MYAPP_DATABASE_PASSWORD'] %>
 ```
 
-9.コンテナ立ち上げ
+### コンテナ立ち上げ
 
-```
+```bash
 $ docker-compose up
 途中で立ち上がらないなどのエラーが出ないこと。
 ```
 
-10.別タブを開き下記のコマンドを実行してDBを作成
+### 別タブを開き下記のコマンドを実行してDBを作成
 
-```
+```bash
 $ docker exec -ti railspostgres_railpapp_1 bash
 $ rake db:create
 ```
@@ -122,14 +107,14 @@ $ rake db:create
 
 ## ログインURL
 
-```
-1. Rubyサイト
+
+### Rubyサイト
+
 http://localhost:3000
 
-2. adminer
+### adminer(DB管理ツール)
 
 http://127.0.0.1:8081
-
 
 * ログイン情報
   - データベース種類: Postgresql
@@ -137,27 +122,25 @@ http://127.0.0.1:8081
   - ユーザ名: postgres
   - パスワード:password
 
-3. mailhog
+mailhog(メールサーバ)
 
 http://127.0.0.1:8025
 
-```
-
 ## コンテナ起動
 
-```
+```bash
 docker-compose up -d
 ```
 
 ## コンテナ停止
 
-```
+```bash
 docker-compose stop
 ```
 
 ## コンテナ削除
 
-```
+```bash
 docker-compose down
 ```
 
