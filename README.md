@@ -61,12 +61,14 @@ $ docker-compose run railpapp rails webpacker:install
 ```bash
 $ vi src/config/database.yml
 
+以下の内容に上書きする。
+
 default: &default
   adapter: postgresql
   encoding: unicode
-  host: postgresdb #追加
-  username: postgres #追加
-  password: password #追加
+  host: postgresdb
+  username: postgres
+  password: password
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
 
 development:
@@ -88,7 +90,8 @@ production:
 
 ```bash
 $ docker-compose up -d
-途中で立ち上がらないなどのエラーが出ないこと。
+立ち上がっていないコンテナは不要なので消しておくこと。
+コンテナ確認/削除方法は割愛。
 ```
 
 ### 下記のコマンドを実行してDBを作成
