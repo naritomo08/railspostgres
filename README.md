@@ -79,7 +79,7 @@ development:
 test:
   <<: *default
   database: myapp_test
-  
+
 production:
   <<: *default
   database: myapp_production
